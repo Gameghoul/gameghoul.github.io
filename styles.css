@@ -1,3 +1,13 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jua", sans-serif;
+  color: #2c2c2c;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -7,36 +17,43 @@ body {
   background-color: #e28db4;
 }
 
-/* VER 1 */
-/* .container {
-  width: 100%;
-  height: 105%;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.gg-body,
-.gg-eyes,
-.gg-eyes-container,
-.gg-glasses {
-  position: absolute;
-  width: 100%;
-  justify-self: flex-end;
-}
-
-.gg-body img,
-.gg-eyes img,
-.gg-glasses img {
-  width: 80%;
-  max-width: 1000px;
-} */
-
-/* VER 2 */
 .container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* CONTENT */
+.content-container {
+  display: grid;
+  grid-template-rows: 30% 70%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 55%;
+  /* max-height: 700px; */
+  /* background-color: red; */
+}
+
+.gg-logo {
+  width: 50%;
+  padding-top: 1rem;
+  justify-self: center;
+}
+
+.gg-logo img {
+  width: 100%;
+  max-height: 150px;
+  top: 0;
+}
+
+.main {
+  margin: auto;
+  /* justify-self: center; */
+}
+
+/* GAMEGHOUL */
+.gg-container {
   position: absolute;
   width: 100%;
   height: 55%;
@@ -54,54 +71,19 @@ body {
   position: absolute;
   bottom: 0%;
   width: 100%;
-  /* justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  justify-self: flex-end; */
+  max-width: 1000px;
+  max-height: 500px;
 }
 
 .gg-body img,
-.gg-eyes img,
 .gg-glasses img {
   width: 80%;
   max-width: 1000px;
 }
 
-/* VER 1 */
-/* .gg-eyes {
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.gg-eyes-container {
-  display: grid;
-  overflow: hidden;
-  height: 65%;
-  grid-template-columns: 50% 50%;
-  justify-content: space-evenly;
-}
-
-.gg-eye {
+.gg-glasses {
   z-index: 3;
-  margin-top: auto;
-  bottom: 0;
-  height: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  background-color: red;
-} */
-
-/* VER 2 */
-.gg-body {
-  /* justify-content: center;
-  align-items: center;
-  align-content: center;
-  text-align: center;
-  justify-self: flex-end; */
+  pointer-events: none;
 }
 
 .gg-eyes {
@@ -126,37 +108,25 @@ body {
   display: grid;
   grid-template-columns: 46% 46%;
   justify-content: space-evenly;
-  /* background-color: red; */
 }
 
 .gg-eye {
   overflow: hidden;
   z-index: 3;
   display: grid;
-  justify-content: center;
   align-items: center;
-  /* min-width: 20vw;
-    min-height: 20vh; */
-  /* margin-top: auto; */
-  /* bottom: 0; */
-  /* height: 100%; */
   aspect-ratio: 1/1;
   max-width: 400px;
   border-radius: 50%;
-  /* width: 100%;
-  height: 100%; */
-  /* text-align: center;
-  justify-content: center; */
   background-color: white;
-  /* background-color: blue; */
 }
 
-.gg-eye img {
+.gg-pupil {
   justify-self: center;
   width: 80%;
   max-width: 600px;
   margin-top: -40%;
-  /* transition: ease-in-out 1s; */
+  transform-origin: center;
 }
 
 #righteye {
@@ -167,9 +137,4 @@ body {
 #lefteye {
   justify-self: left;
   margin-left: 5%;
-}
-
-.gg-glasses {
-  z-index: 3;
-  pointer-events: none;
 }

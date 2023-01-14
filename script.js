@@ -1,3 +1,4 @@
+let body_ref = document.querySelector(".gg-body");
 let pupil_ref = document.querySelectorAll(".gg-pupil");
 
 let events = ["mousemove", "touchmove"];
@@ -30,10 +31,6 @@ events.forEach((eventType) => {
 
       var x = !isTouchDevice() ? event.clientX : event.touches[0].clientX;
       var y = !isTouchDevice() ? event.clientY : event.touches[0].clientY;
-
-      console.log(y);
-
-      //   var newX = 0 + (x - (window.screen.width * window.devicePixelRatio) / 2);
 
       var newX = 0 + (x - window.innerWidth / 2) / 8;
 
