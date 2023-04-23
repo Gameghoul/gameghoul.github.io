@@ -1,0 +1,283 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jua", sans-serif;
+  color: white;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #e28db4;
+}
+
+h1 {
+  font-size: 4.8rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+  color: #9b2b5d;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* CONTENT */
+.content-container {
+  display: grid;
+  grid-template-rows: 15% 85%;
+  justify-content: center;
+  /* text-align: center; */
+  width: 100%;
+  height: 70%;
+}
+
+.gg-logo {
+  width: 100%;
+  padding-top: 1rem;
+  justify-self: center;
+}
+
+.gg-logo img {
+  /* width: 100%; */
+  /* min-width: 500px; */
+  /* max-height: 150px; */
+  height: 100%;
+  /* width: auto; */
+  margin: auto;
+  justify-self: center;
+  align-self: center;
+  top: 0;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 40% 60%;
+  height: 100%;
+  width: auto;
+  padding-top: 4rem;
+  margin-bottom: auto;
+  /* justify-self: center; */
+}
+
+.main-logos {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20%;
+  /* justify-self: start; */
+  justify-content: space-evenly;
+  /* margin: auto; */
+  height: 100%;
+  width: 100%;
+}
+
+.main-logos img {
+  width: 100%;
+  height: auto;
+  /* height: 100%;
+  width: auto; */
+  justify-self: center;
+  align-self: center;
+  animation: logo-float 6s in;
+}
+
+.main-logo:hover {
+  filter: brightness(100) drop-shadow(0 0 0.75rem rgb(85, 85, 85));
+  animation: logo-anim 0.2s;
+  cursor: pointer;
+}
+
+.main-info {
+  max-width: 1000px;
+  justify-self: center;
+  /* align-self: center; */
+}
+
+@keyframes logo-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  80% {
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes logo-float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(0.5rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1025px) {
+  h1 {
+    font-size: 3.2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .content-container {
+    grid-template-rows: 8% 92%;
+    width: 100%;
+    min-width: 500px;
+    height: 80%;
+    min-height: 1100px;
+    justify-content: unset;
+  }
+
+  .gg-logo img {
+    height: 90%;
+    margin: auto;
+  }
+
+  .main {
+    grid-template-rows: 50% 50%;
+    padding-top: 1rem;
+  }
+
+  .main-logos {
+    min-width: 500px;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+  }
+
+  .main-logos img {
+    height: 90%;
+    margin: auto;
+    /* width: 90%;
+    height: auto; */
+    /* margin-bottom: 2%; */
+  }
+
+  .logo-left {
+    margin-right: 1rem;
+    margin-left: auto;
+  }
+
+  .logo-right {
+    margin-left: 1rem;
+    margin-right: auto;
+  }
+
+  .main-info {
+    width: 90%;
+    max-width: 1000px;
+    justify-self: center;
+    /* margin-top: 5%; */
+    /* align-self: center; */
+  }
+
+  .info-body {
+    width: 400px;
+    margin: auto;
+  }
+
+  @media (max-height: 920px) {
+    .gg-container {
+      visibility: hidden;
+    }
+  }
+}
+
+/* GAMEGHOUL */
+.gg-container {
+  position: absolute;
+  width: 100%;
+  height: 55%;
+  /* height: 32vmax; */
+  bottom: -4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.gg-body,
+.gg-eyes,
+.gg-glasses {
+  position: absolute;
+  bottom: 0;
+  /* max-width: 1000px; */
+  max-width: 64vmin;
+  height: 100%;
+  /* max-height: 500px; */
+  /* max-height: 32vmin; */
+  margin: auto;
+}
+
+.gg-body img,
+.gg-glasses img {
+  width: 100%;
+}
+
+.gg-glasses {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.gg-eyes {
+  z-index: 1;
+  /* margin-bottom: -3rem; */
+  /* justify-self: center;
+  align-self: center; */
+  /* height: 80%; */
+  /* width: 100%; */
+  /* margin-bottom: 2%; */
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: space-evenly;
+}
+
+.gg-eye {
+  overflow: hidden;
+  z-index: 3;
+  width: 100%;
+  /* display: grid;
+  align-items: center; */
+  aspect-ratio: 1/1;
+  /* max-width: 26vmin; */
+  border-radius: 50%;
+  background-color: white;
+}
+
+.gg-pupil {
+  justify-self: center;
+  aspect-ratio: 1/1;
+  /* width: 80%;
+  max-width: 38vmin; */
+  margin-top: -40%;
+  transform-origin: center;
+}
+
+#righteye {
+  justify-self: right;
+  margin-right: 5%;
+}
+
+#lefteye {
+  justify-self: left;
+  margin-left: 2%;
+}

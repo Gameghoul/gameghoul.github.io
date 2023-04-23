@@ -2,105 +2,146 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="favicon" href="images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.1/dist/aframe-master.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <!-- <script src="https://unpkg.com/aframe-animation-component@^5.1.2/dist/aframe-animation-component.min.js"></script> -->
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script type="text/javascript" src="/main.js" defer></script>
     <title>Gameghoul</title>
   </head>
   <body>
-    <div class="container">
-      <div class="content-container">
-        <div class="gg-logo">
-          <img src="images/ggtexthori.png" alt="Gameghoul Text Logo" />
-        </div>
-        <div class="main">
-          <div class="main-logos">
-            <a
-              class="main-logo logo-left"
-              href="https://youtube.com/playlist?list=PL3cFL0U3kvWwUm52PShRzVRbCJkDUsQAg"
-              target="_blank"
-              onmouseover="logoHover('yt')"
-              onmouseleave="logoLeave()"
-            >
-              <img src="images/logo-yt.png" alt="YouTube Logo" id="youtube" />
-            </a>
-            <a
-              class="main-logo logo-right"
-              href="https://twitter.com/Gameghoul"
-              target="_blank"
-              onmouseover="logoHover('twit')"
-              onmouseleave="logoLeave()"
-            >
-              <img src="images/logo-twit.png" alt="Twitter Logo" id="twitter" />
-            </a>
-            <a
-              class="main-logo logo-left"
-              href="https://gameghoul.itch.io/"
-              target="_blank"
-              onmouseover="logoHover('itch')"
-              onmouseleave="logoLeave()"
-            >
-              <img src="images/logo-itch.png" alt="Itch IO Logo" id="itchio" />
-            </a>
-            <a
-              class="main-logo logo-right"
-              href="https://www.artstation.com/gameghoul"
-              target="_blank"
-              onmouseover="logoHover('art')"
-              onmouseleave="logoLeave()"
-            >
-              <img
-                src="images/logo-art.png"
-                alt="Artstation Logo"
-                id="artstation"
-              />
-            </a>
-          </div>
-          <div class="main-info">
-            <h1 class="info-heading">HELLO THERE!</h1>
-            <h2 class="info-body">
-              I'm Gameghoul and I make things! <br />
-              Hover over a link for more information :)
-            </h2>
-          </div>
-        </div>
-      </div>
-      <div class="gg-container">
-        <!-- VER 2 -->
-        <div class="gg-body">
-          <img src="images/ggbody.png" alt="Gameghoul Body" />
-          <div class="gg-eyes">
-            <div class="gg-eyes-container">
-              <div id="righteye" class="gg-eye">
-                <img
-                  class="gg-pupil"
-                  src="images/ggpupil.png"
-                  alt="Gameghoul Pupil"
-                />
-              </div>
-              <div id="lefteye" class="gg-eye">
-                <img
-                  class="gg-pupil"
-                  src="images/ggpupil.png"
-                  alt="Gameghoul Pupil"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="gg-glasses">
-          <img src="images/ggglasses.png" alt="Gameghoul Glasses" />
-        </div>
-      </div>
-    </div>
+    <!--A-FRAME-->
+    <a-scene loading-screen="enabled: true" light="defaultLightsEnabled: false">
+      <!-- ASSETS -->
+      <a-assets>
+        <a-asset-item
+          id="gameghoul"
+          src="/meshes/gglowpoly.gltf"
+        ></a-asset-item>
+        <a-asset-item
+          id="gameghoulrigged"
+          src="/meshes/ggrigged2.gltf"
+        ></a-asset-item>
+        <a-asset-item id="room" src="/meshes/ggroom.gltf"></a-asset-item>
+      </a-assets>
 
-    <script src="script.js"></script>
+      <!-- LOADED ASSETS -->
+      <a-entity
+        id="gameghoulent"
+        class="draggable"
+        gltf-model="#gameghoulrigged"
+        position="0 0 -3.4"
+        shadow="cast: true"
+        animation-mixer="clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
+        ondragstart="GrabTest(1)"
+        ondragend="GrabTest(2)"
+      ></a-entity>
+      <a-entity
+        id="rooment"
+        gltf-model="#room"
+        shadow="cast: true"
+        animation-mixer="clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
+      ></a-entity>
+
+      <!-- PRIMITIVES -->
+      <a-box
+        id="pointA"
+        class="point"
+        position="-4 0 0"
+        scale="2 2 5"
+        material="opacity: 0.0; transparent: true"
+      ></a-box>
+      <a-box
+        id="pointB"
+        class="point"
+        position="0 0 4"
+        scale="6 2 2"
+        material="opacity: 0.0; transparent: true"
+      ></a-box>
+      <a-box
+        id="pointC"
+        class="point"
+        position="4 0 0"
+        scale="2 2 5"
+        material="opacity: 0.0; transparent: true"
+      ></a-box>
+      <a-box
+        id="pointD"
+        class="point"
+        position="0 0 -4"
+        scale="6 2 2"
+        material="opacity: 0.0; transparent: true"
+      ></a-box>
+
+      <!-- LIGHTS -->
+      <a-entity light="type: ambient; intensity: 1.6;"></a-entity>
+      <a-entity
+        light="type: directional;
+                         castShadow: true;
+                         intensity: 0.4;"
+        position="0 2 0s"
+      >
+      </a-entity>
+
+      <!-- CAMERA RIG -->
+      <a-entity
+        id="cameraRig"
+        position="0 1 0s"
+        rotation="-40 0 0"
+        progressive-controls="objects: .draggable; reverseMouseDrag: true; reverseTouchDrag: true"
+      >
+        <!-- <a-entity id="head" camera="fov: 60">
+          
+        </a-entity> -->
+
+        <a-entity
+          id="head"
+          camera="fov: 40"
+          capture-mouse=""
+          raycaster="objects: .draggable"
+          cursor="rayOrigin: mouse"
+          static-body="shape: sphere; sphereRadius: 0.001"
+          super-hands="colliderEvent: raycaster-intersection;
+                             colliderEventProperty: els;
+                             colliderEndEvent:raycaster-intersection-cleared;
+                             colliderEndEventProperty: clearedEls;"
+        >
+          <!-- rotation="-15 0 0" -->
+          <!-- <a-entity
+            id="ggtext"
+            text="anchor: center; align: center; width: 0.5; color: white; value: DOOR"
+            position="0 0 -0.5"
+          ></a-entity> -->
+        </a-entity>
+        <!-- <a-entity
+          id="mouseCursor"
+          raycaster="objects: .draggable"
+          cursor="fuse: true; fuseTimeout: 1000; rayOrigin: mouse"
+          geometry="primitive: ring"
+          position="0 0 -3"
+          scale="0.1 0.1 0.1"
+          material="color: white"
+        ></a-entity> -->
+
+        <!-- <a-entity
+          sphere-collider="objects: a-box"
+          super-hands
+          hand-controls="hand: left"
+        ></a-entity>
+        <a-entity
+          sphere-collider="objects: a-box"
+          super-hands
+          hand-controls="hand: right"
+        ></a-entity> -->
+      </a-entity>
+    </a-scene>
+    <!--THREE.JS-->
+    <!-- <canvas id="bg"></canvas>
+    <script type="module" src="/main.js"></script> -->
   </body>
 </html>
