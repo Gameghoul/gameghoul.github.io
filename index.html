@@ -16,18 +16,32 @@
   </head>
   <body>
     <!--A-FRAME-->
-    <a-scene loading-screen="enabled: true" light="defaultLightsEnabled: false">
+    <a-scene
+      loading-screen="enabled: false"
+      light="defaultLightsEnabled: false"
+      vr-mode-ui="enabled: false"
+    >
       <!-- ASSETS -->
       <a-assets>
-        <a-asset-item
+        <!-- <a-asset-item
           id="gameghoul"
           src="/meshes/gglowpoly.gltf"
-        ></a-asset-item>
+        ></a-asset-item> -->
         <a-asset-item
           id="gameghoulrigged"
           src="/meshes/ggrigged2.gltf"
         ></a-asset-item>
         <a-asset-item id="room" src="/meshes/ggroom.gltf"></a-asset-item>
+        <img id="logogg" crossorigin="anonymous" src="images/ggtexthori.png" />
+        <img id="logoyt" crossorigin="anonymous" src="images/logo-yt.png" />
+        <img id="logotwit" crossorigin="anonymous" src="images/logo-twit.png" />
+        <img id="logoitch" crossorigin="anonymous" src="images/logo-itch.png" />
+        <img id="logoart" crossorigin="anonymous" src="images/logo-art.png" />
+        <img
+          id="arrowleft"
+          crossorigin="anonymous"
+          src="images/arrowleft.png"
+        />
       </a-assets>
 
       <!-- LOADED ASSETS -->
@@ -35,6 +49,7 @@
         id="gameghoulent"
         class="draggable"
         gltf-model="#gameghoulrigged"
+        material="shader: flat"
         position="0 0 -3.4"
         shadow="cast: true"
         animation-mixer="clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
@@ -44,6 +59,7 @@
       <a-entity
         id="rooment"
         gltf-model="#room"
+        material="shader: flat"
         shadow="cast: true"
         animation-mixer="clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
       ></a-entity>
@@ -117,6 +133,48 @@
             text="anchor: center; align: center; width: 0.5; color: white; value: DOOR"
             position="0 0 -0.5"
           ></a-entity> -->
+          <a-plane
+            src="#logogg"
+            id="gglogo"
+            class="draggable"
+            transparent="true"
+            position="0 0 -1"
+            scale="0.4 0.4 1"
+            onclick="PageStart()"
+          ></a-plane>
+          <a-entity
+            id="gghud"
+            position="0 1.25 -1.5"
+            scale="0.2 0.2 1"
+            visible="false"
+          >
+            <a-plane
+              src="#logotwit"
+              id="gglogos"
+              class="draggable"
+              transparent="true"
+              scale="0.8 0.8 1"
+              onclick="VisitPage()"
+            ></a-plane>
+            <a-plane
+              src="#arrowleft"
+              id="arrowleft"
+              class="draggable"
+              transparent="true"
+              position="-1 0 0"
+              scale="0.8 0.8 1"
+              onclick="ggTurn(1)"
+            ></a-plane>
+            <a-plane
+              src="#arrowleft"
+              id="arrowright"
+              class="draggable"
+              transparent="true"
+              position="1 0 0"
+              scale="-0.8 -0.8 1"
+              onclick="ggTurn(-1)"
+            ></a-plane>
+          </a-entity>
         </a-entity>
         <!-- <a-entity
           id="mouseCursor"

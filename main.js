@@ -6,6 +6,10 @@ let gameghoul = document.querySelector("#gameghoulent");
 let ggtext = document.querySelector("#ggtext");
 let ggroom = document.querySelector("#rooment");
 let ggcam = document.querySelector("#cameraRig");
+let gglogo = document.querySelector("#gglogo");
+let gghud = document.querySelector("#gghud");
+let gglogos = document.querySelector("#gglogos");
+let arrowleft = document.querySelector("#arrowleft");
 
 let upright = false;
 let ggRotation = 1;
@@ -45,6 +49,46 @@ let currTarget = "0 0.2 -2";
   });
 } */
 
+document.body.addEventListener("keydown", function (event) {
+  switch (event.code) {
+    case "ArrowLeft":
+      ggTurn(1);
+      break;
+    case "ArrowRight":
+      ggTurn(-1);
+      break;
+    case "ArrowUp":
+      PageStart();
+      break;
+    case "ArrowDown":
+      // Down pressed
+      break;
+    case "Space":
+      VisitPage();
+  }
+});
+
+gameghoul.addEventListener("animation-finished", function () {
+  if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
+    //DOOR
+    gameghoul.setAttribute(
+      "animation-mixer",
+      "clip: GGIdleBounce; loop: repeat; clampWhenFinished: false"
+    );
+    gameghoul.setAttribute("look-at", "[camera]");
+    gghud.setAttribute("visible", "true");
+    gghud.setAttribute(
+      "animation",
+      "property: position; to: 0 0.45 -1.5; dur: 400;"
+    );
+    upright = true;
+  }
+});
+
+arrowleft.addEventListener("mousedown", function () {
+  console.log("YES");
+});
+
 function ggTurn(rotvalue) {
   if (upright && !ggRotating) {
     ggRotating = true;
@@ -58,10 +102,10 @@ function ggTurn(rotvalue) {
         "animation-mixer",
         "clip: GGWalkCycle; loop: repeat; clampWhenFinished: false; timeScale: 1"
       );
-      console.log("HERE");
       if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
         //DOOR
         // ggtext.setAttribute("text", "value: DOOR");
+        gglogos.setAttribute("src", "#logotwit");
         gameghoul.setAttribute("look-at", "#pointD");
         gameghoul.setAttribute(
           "animation",
@@ -70,6 +114,7 @@ function ggTurn(rotvalue) {
       } else if (ggRotation % 4 == 2 || ggRotation % 4 == -2) {
         //TV
         // ggtext.setAttribute("text", "value: TV");
+        gglogos.setAttribute("src", "#logoitch");
         gameghoul.setAttribute("look-at", "#pointA");
         gameghoul.setAttribute(
           "animation",
@@ -78,6 +123,7 @@ function ggTurn(rotvalue) {
       } else if (ggRotation % 4 == 3 || ggRotation % 4 == -1) {
         //PC
         // ggtext.setAttribute("text", "value: PC");
+        gglogos.setAttribute("src", "#logoyt");
         gameghoul.setAttribute("look-at", "#pointB");
         gameghoul.setAttribute(
           "animation",
@@ -86,6 +132,7 @@ function ggTurn(rotvalue) {
       } else if (ggRotation % 4 == 0 || ggRotation % 4 == -0) {
         //EISEL
         // ggtext.setAttribute("text", "value: EISEL");
+        gglogos.setAttribute("src", "#logoart");
         gameghoul.setAttribute("look-at", "#pointC");
         gameghoul.setAttribute(
           "animation",
@@ -96,6 +143,7 @@ function ggTurn(rotvalue) {
     setTimeout(function () {
       if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
         //DOOR
+
         gameghoul.setAttribute(
           "animation-mixer",
           "clip: GGIdleBounce; loop: repeat; clampWhenFinished: false"
@@ -107,6 +155,7 @@ function ggTurn(rotvalue) {
         gameghoul.setAttribute("look-at", "[camera]");
       } else if (ggRotation % 4 == 2 || ggRotation % 4 == -2) {
         //TV
+
         gameghoul.setAttribute(
           "animation-mixer",
           "clip: GGController; loop: once; clampWhenFinished: true; timeScale: 1"
@@ -146,44 +195,53 @@ function ggTurn(rotvalue) {
   }
 }
 
-document.body.addEventListener("keydown", function (event) {
-  switch (event.key) {
-    case "ArrowLeft":
-      ggTurn(1);
-      break;
-    case "ArrowRight":
-      ggTurn(-1);
-      break;
-    case "ArrowUp":
-      if (
-        gameghoul.getAttribute(
-          "animation-mixer",
-          "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
-        ) &&
-        !upright
-      ) {
-        ggcam.setAttribute(
-          "animation",
-          "property: rotation; to: '0 0 0'; dur: 800;"
-        );
-        setTimeout(function () {
-          gameghoul.setAttribute(
-            "animation-mixer",
-            "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 1"
-          );
-          ggroom.setAttribute(
-            "animation-mixer",
-            "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 1"
-          );
-          upright = true;
-        }, 1000);
-      }
-      break;
-    case "ArrowDown":
-      // Down pressed
-      break;
+function PageStart() {
+  gglogo.setAttribute("class", "");
+  if (
+    gameghoul.getAttribute(
+      "animation-mixer",
+      "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 0"
+    ) &&
+    !upright
+  ) {
+    ggcam.setAttribute(
+      "animation",
+      "property: rotation; to: '0 0 0'; dur: 800;"
+    );
+    gglogo.setAttribute("animation", "property: scale; to: '0 0 0'; dur: 800;");
+    setTimeout(function () {
+      gameghoul.setAttribute(
+        "animation-mixer",
+        "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 1"
+      );
+      ggroom.setAttribute(
+        "animation-mixer",
+        "clip: GGDoorEnter; loop: once; clampWhenFinished: true; timeScale: 1"
+      );
+      gglogo.setAttribute("visible", "false");
+    }, 1000);
   }
-});
+}
+
+function VisitPage() {
+  if (upright) {
+    if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
+      //DOOR
+      window.open("https://twitter.com/Gameghoul");
+    } else if (ggRotation % 4 == 2 || ggRotation % 4 == -2) {
+      //TV
+      window.open("https://gameghoul.itch.io/");
+    } else if (ggRotation % 4 == 3 || ggRotation % 4 == -1) {
+      //PC
+      window.open(
+        "https://youtube.com/playlist?list=PL3cFL0U3kvWwUm52PShRzVRbCJkDUsQAg"
+      );
+    } else if (ggRotation % 4 == 0 || ggRotation % 4 == -0) {
+      //EISEL
+      window.open("https://www.artstation.com/gameghoul");
+    }
+  }
+}
 
 function GrabTest(str) {
   if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
@@ -201,17 +259,6 @@ function GrabTest(str) {
     }
   }
 }
-
-gameghoul.addEventListener("animation-finished", function () {
-  if (ggRotation % 4 == 1 || ggRotation % 4 == -3) {
-    //DOOR
-    gameghoul.setAttribute(
-      "animation-mixer",
-      "clip: GGIdleBounce; loop: repeat; clampWhenFinished: false"
-    );
-    gameghoul.setAttribute("look-at", "[camera]");
-  }
-});
 
 function updateLoop() {
   window.requestAnimationFrame(updateLoop);
